@@ -1,3 +1,5 @@
+# Code to scrape email address for ArXiv emails
+
 from __future__ import print_function
 import httplib2
 import os
