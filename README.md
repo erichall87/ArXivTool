@@ -25,6 +25,15 @@ the following instructions
 
 ##Using `ScrapeEmail.py`
 
+The main function takes two arguments, the query format for your email and a saving option. 
+The query string should be what you would type into the Gmail search to get ONLY your ArXiv notification emails.
+For instance if you have a folder just for these emails name ArXiv, the query would be "label:ArXiv". Another good place to start might be "from:no-reply@arxiv.org". The saving option denotes whether or not you want to save the parsed emails to a json file or not.
+
+##Using `AbstractAnalysis.py`
+
+Given that you have a json of abstracts saved as `FullCorpus.json` in the project folder. You can simply run `AbstractAnalysis.py` to get a 500 dimensional representation of all the abstracts. For now I recommend running this
+script from an IDE or IPython environment so you can explore the embeddings and/or use the matrix of distances to find similar abstracts to abstracts of interest.
+
 
 
 
