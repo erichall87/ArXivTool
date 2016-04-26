@@ -6,6 +6,7 @@ import os
 import base64
 import re
 import json
+import sys
 
 from apiclient import discovery
 import oauth2client
@@ -73,19 +74,21 @@ def parseEmail(email):
     return absDict
 
 
-def main(saving = False):
+def main(query,saving = False):
     """
     Creates a Gmail API service object and outputs a list of label names
     of the user's Gmail account.
     """
+
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
     dataDict = dict()
 
     try:
+        print('Getting list of emails that satisfy query')
         response = service.users().messages().list(userId='me',
-                                                   q = 'label:ArXiv').execute()
+                                                   q = query).execute()
 
         emails = []
         if 'messages' in response: 
@@ -94,11 +97,13 @@ def main(saving = False):
         while 'nextPageToken' in response:
           page_token = response['nextPageToken']
           response = service.users().messages().list(userId='me',
-                                                     q='label:ArXiv',
+                                                     q=query,
                                                      pageToken=page_token).execute()
           if 'messages' in response: 
             emails.extend(response['messages'])
         counter = 1
+        print('Found %d total emails' % (len(emails)))
+        print('Parsing Email number:')
         for email in emails:
             if counter%10 == 0:
                 print(counter)
@@ -108,7 +113,9 @@ def main(saving = False):
             absDict = parseEmail(msgStr)
             absDict.update(dataDict)
             dataDict = absDict
+        print('Done')
         if saving:
+            print('Saving Abstracts to json file')
             with open('FullCorpus.json','w') as f:
                 json.dump(dataDict,f)
     
@@ -118,7 +125,6 @@ def main(saving = False):
 
 
 if __name__ == '__main__':
-
-    email = main()
+    email = main('label:ArXiv')
  
 
