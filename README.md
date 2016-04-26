@@ -25,7 +25,7 @@ the following instructions
 
 ##Using `ScrapeEmail.py`
 
-A lot of the code in `ScrapeEmail.py` was taken from the Google API python quickstart tutorial fond [here](https://developers.google.com/gmail/api/quickstart/python#step_3_set_up_the_sample)
+A lot of the code in `ScrapeEmail.py` was taken from the Google API python quickstart tutorial found [here](https://developers.google.com/gmail/api/quickstart/python#step_3_set_up_the_sample)
 
 The main function takes two arguments, the query format for your email and a saving option. 
 The query string should be what you would type into the Gmail search to get ONLY your ArXiv notification emails.
