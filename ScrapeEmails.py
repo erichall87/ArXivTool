@@ -123,8 +123,7 @@ def main(query,saving = False):
         print('An error occurred: %s' % error)
 
 
-
 if __name__ == '__main__':
-    email = main('label:ArXiv')
+    email = main('label:ArXiv', saving = False)
  
 
